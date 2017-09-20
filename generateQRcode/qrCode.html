@@ -4,8 +4,7 @@
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <script src="js/qrCode.js"></script>
-    <script src="js/test.js"></script>
+    <script src="./js/qrCode.js"></script>
     <style>
         * {
             padding: 0;
@@ -29,20 +28,43 @@
         <div class="container">
             <div id="qrcode">
             </div>
-            <input type="text" id="getValue" /> <button id="send">生成验证码</button>
+            <input type="text" id="getValue" placeholder="请输入" /> <button id="send">生成验证码</button>
+            <div>
+                <input type="number" id="getWidth" placeholder="大小(默认120)" />
+
+            </div>
         </div>
     </div>
 
     <script>
         window.onload = function() {
-            var qrcode = new QRCode(document.getElementById("qrcode"), {
-                width: 120, //设置宽高
-                height: 120
-            });
-            qrcode.makeCode("https://www.cnblogs.com/rlann/");
-            document.getElementById("send").onclick = function() {
-                qrcode.makeCode(document.getElementById("getValue").value);
+
+            function generate(num) {
+                this.w = num;
+                var that = this;
+                this.qrcode = new QRCode(document.getElementById("qrcode"), {
+                    width: that.w, //设置宽高
+                    height: that.w
+                });
+                this.url = document.getElementById("getValue").value ? document.getElementById("getValue").value : "say hello";
+                this.qrcode.makeCode(this.url);
             }
+
+            function foo() {
+                this.getWidth = document.getElementById('getWidth').value.slice(0, 3);
+                this.w = parseInt(this.getWidth) ? parseInt(this.getWidth) : 120;
+                new generate(this.w);
+                let _this = this;
+                document.getElementById("send").addEventListener('click', function() {
+                    document.getElementById('qrcode').innerHTML = '';
+                    _this.getWidth = document.getElementById('getWidth').value.slice(0, 3);
+                    _this.w = parseInt(_this.getWidth) ? parseInt(_this.getWidth) : 120;
+                    new generate(_this.w);
+                })
+            }
+            new foo();
+
+
         }
     </script>
 </body>
