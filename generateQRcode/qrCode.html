@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="./js/qrcode.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .box {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="container">
+            <div id="qrcode">
+            </div>
+            <input type="text" id="getValue" /> <button id="send">生成验证码</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
+                width: 120, //设置宽高
+                height: 120
+            });
+            qrcode.makeCode("https://www.cnblogs.com/rlann/");
+            document.getElementById("send").onclick = function() {
+                qrcode.makeCode(document.getElementById("getValue").value);
+            }
+        }
+    </script>
+</body>
+
+</html>
