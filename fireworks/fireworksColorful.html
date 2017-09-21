@@ -23,15 +23,27 @@
         
         .container {
             padding: 20px;
+            position: absolute;
+            top: 10vh;
         }
         
         #canvasEl {
             z-index: -1;
         }
         
-        #sayHello {
+        .contrls {
+            margin-top: 12px;
+        }
+        
+        #qrcode {
+            background: lightcoral;
             position: absolute;
-            top: 50px;
+            top: 120px;
+        }
+        
+        #qrcode>img {
+            background: lightcoral;
+            position: absolute;
         }
     </style>
 </head>
@@ -39,117 +51,60 @@
 <body>
     <div class="box">
         <canvas id="canvasEl"> </canvas>
-        <p id="sayHello">colorful world</p>
+        <div class="container">
+            <div id="qrcode"></div>
+            <!-- <div id="qrcode">
+            </div> -->
+            <div class="contrls">
+                <input type="text" id="getValue" placeholder="请输入" /> <button id="send">生成验证码</button>
+
+            </div>
+            <div class="contrls">
+                <input type="number" id="getWidth" placeholder="大小(默认240)" />
+                <button id="clear">&nbsp;清空&nbsp;</button>
+            </div>
+        </div>
     </div>
 
     <script src="./js/anime.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/utils.js"></script>
-    <!-- <script src="./js/fireworks.js"></script> -->
+    <script src="./js/utils.js"></script>
+    <script src="./js/fireworksColorful.js"></script>
+    <script src="../generateQRcode/js/qrCode.js"></script>
     <script type="text/javascript">
-        console.log('sayhello')
-        var canvas = document.getElementById("canvasEl"); //获得画布
-        var ctx = canvas.getContext("2d"); //得到canvas的上下文对象（获得画布控制权）
+        window.onload = function() {
 
-        console.log('fireworks')
-
-        function updateCoords(e) {
-            pointerX = (e.clientX || e.touches[0].clientX) - canvasEl.getBoundingClientRect().left, pointerY = e.clientY || e.touches[0].clientY - canvasEl.getBoundingClientRect().top
-        }
-
-        function setParticuleDirection(e) {
-            var t = anime.random(0, 360) * Math.PI / 180,
-                a = anime.random(50, 180),
-                n = [-1, 1][anime.random(0, 1)] * a;
-            return {
-                x: e.x + n * Math.cos(t),
-                y: e.y + n * Math.sin(t)
+            function generate(num) {
+                this.w = num;
+                var that = this;
+                this.qrcode = new QRCode(document.getElementById("qrcode"), {
+                    width: that.w, //设置宽高
+                    height: that.w
+                });
+                this.url = document.getElementById("getValue").value ? document.getElementById("getValue").value : "say hello";
+                this.qrcode.makeCode(this.url);
             }
-        }
 
-        function createParticule(e, t) {
-            var a = {};
-            return a.x = e, a.y = t, a.color = colors[anime.random(0, colors.length - 1)], a.radius = anime.random(16, 32), a.endPos = setParticuleDirection(a), a.draw = function() {
-                ctx.beginPath(), ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0), ctx.fillStyle = a.color, ctx.fill()
-            }, a
-        }
+            function foo() {
+                this.getWidth = document.getElementById('getWidth').value.slice(0, 3);
+                this.w = parseInt(this.getWidth) ? parseInt(this.getWidth) : 240;
+                new generate(this.w);
+                let _this = this;
+                document.getElementById("send").addEventListener('click', function() {
+                    document.getElementById('qrcode').innerHTML = '';
+                    _this.getWidth = document.getElementById('getWidth').value.slice(0, 3);
+                    _this.w = parseInt(_this.getWidth) ? parseInt(_this.getWidth) : 240;
+                    new generate(_this.w);
+                })
+                document.getElementById('clear').addEventListener('click', function() {
+                    document.getElementById('getValue').value = '';
+                })
+            }
+            new foo();
 
-        function createCircle(e, t) {
-            var a = {};
-            return a.x = e, a.y = t, a.color = "#F00", a.radius = .1, a.alpha = .5, a.lineWidth = 6, a.draw = function() {
-                ctx.globalAlpha = a.alpha, ctx.beginPath(), ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0), ctx.lineWidth = a.lineWidth, ctx.strokeStyle = a.color, ctx.stroke(), ctx.globalAlpha = 1
-            }, a
-        }
-
-        function renderParticule(e) {
-            for (var t = 0; t < e.animatables.length; t++) e.animatables[t].target.draw()
-        }
-
-        function setColor() {
-            this.arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];
-            this.lanH1 = document.getElementsByClassName('platform')[0];
-            this.title = document.getElementById('title');
-            this.color = '#' +
-                this.arr[parseInt(Math.random() * 16)] +
-                this.arr[parseInt(Math.random() * 16)] +
-                this.arr[parseInt(Math.random() * 16)] +
-                this.arr[parseInt(Math.random() * 16)] +
-                this.arr[parseInt(Math.random() * 16)] +
-                this.arr[parseInt(Math.random() * 16)];
-            return this.color;
 
         }
-
-        function animateParticules(e, t) {
-            for (var a = createCircle(e, t), n = [], i = 0; i < numberOfParticules; i++) n.push(createParticule(e, t));
-            anime.timeline().add({
-                targets: n,
-                x: function(e) {
-                    return e.endPos.x
-                },
-                y: function(e) {
-                    return e.endPos.y
-                },
-                radius: .1,
-                duration: anime.random(1200, 1800),
-                easing: "easeOutExpo",
-                update: renderParticule
-            }).add({
-                targets: a,
-                radius: anime.random(80, 160),
-                lineWidth: 0,
-                alpha: {
-                    value: 0,
-                    easing: "linear",
-                    duration: anime.random(600, 800)
-                },
-                duration: anime.random(1200, 1800),
-                easing: "easeOutExpo",
-                update: renderParticule,
-                offset: 0
-            })
-        }
-
-        // var ctx = canvasEl.getContext("2d"),
-        var numberOfParticules = 30,
-            pointerX = 0,
-            pointerY = 0,
-            tap = "mousedown",
-            color1 = setColor(),
-            colors = [color1, setColor(), setColor(), setColor()],
-            setCanvasSize = debounce(function() {
-                canvasEl.width = 2 * window.innerWidth, canvasEl.height = 2 * window.innerHeight, canvasEl.style.width = window.innerWidth + "px", canvasEl.style.height = window.innerHeight + "px", canvasEl.getContext("2d").scale(2, 2)
-            }, 500),
-            render = anime({
-                duration: 1 / 0,
-                update: function() {
-                    ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
-                }
-            });
-        document.addEventListener(tap, function(e) {
-            colors = [setColor(), setColor(), setColor(), setColor()];
-            "sidebar" !== e.target.id && "sayHello" !== e.target.id && (render.play(), updateCoords(e), animateParticules(pointerX, pointerY))
-        }, !1), setCanvasSize(), window.addEventListener("resize", setCanvasSize, !1)
     </script>
 </body>
 
