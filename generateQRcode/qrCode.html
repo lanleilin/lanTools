@@ -35,7 +35,7 @@
             </div>
             <input type="text" id="getValue" placeholder="请输入" /> <button id="send">生成验证码</button>
             <div class="contrls">
-                <input type="number" id="getWidth" placeholder="大小(默认120)" />
+                <input type="number" id="getWidth" placeholder="大小(默认240)" />
                 <button id="clear">&nbsp;清空&nbsp;</button>
             </div>
         </div>
@@ -57,13 +57,13 @@
 
             function foo() {
                 this.getWidth = document.getElementById('getWidth').value.slice(0, 3);
-                this.w = parseInt(this.getWidth) ? parseInt(this.getWidth) : 120;
+                this.w = parseInt(this.getWidth) ? parseInt(this.getWidth) : 240;
                 new generate(this.w);
                 let _this = this;
                 document.getElementById("send").addEventListener('click', function() {
                     document.getElementById('qrcode').innerHTML = '';
                     _this.getWidth = document.getElementById('getWidth').value.slice(0, 3);
-                    _this.w = parseInt(_this.getWidth) ? parseInt(_this.getWidth) : 120;
+                    _this.w = parseInt(_this.getWidth) ? parseInt(_this.getWidth) : 240;
                     new generate(_this.w);
                 })
                 document.getElementById('clear').addEventListener('click', function() {
