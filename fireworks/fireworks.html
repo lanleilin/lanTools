@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>fireworks click</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .box {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            padding: 20px;
+        }
+        
+        #canvasEl {
+            z-index: -1;
+        }
+        
+        #sayHello {
+            position: absolute;
+            top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <canvas id="canvasEl"> </canvas>
+        <p id="sayHello">say hello</p>
+    </div>
+
+    <script src="./js/anime.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/fireworks.js"></script>
+    <script type="text/javascript">
+        $('#sayHello').click(function() {
+            console.log('sayhello')
+        })
+    </script>
+</body>
+
+</html>
