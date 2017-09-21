@@ -23,7 +23,7 @@
         }
         
         .contrls {
-            margin: 8px 0;
+            margin-top: 12px;
         }
     </style>
 </head>
@@ -33,7 +33,10 @@
         <div class="container">
             <div id="qrcode">
             </div>
-            <input type="text" id="getValue" placeholder="请输入" /> <button id="send">生成验证码</button>
+            <div class="contrls">
+                <input type="text" id="getValue" placeholder="请输入" /> <button id="send">生成验证码</button>
+
+            </div>
             <div class="contrls">
                 <input type="number" id="getWidth" placeholder="大小(默认240)" />
                 <button id="clear">&nbsp;清空&nbsp;</button>
