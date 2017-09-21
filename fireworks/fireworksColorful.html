@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>fireworks click</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .box {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            padding: 20px;
+        }
+        
+        #canvasEl {
+            z-index: -1;
+        }
+        
+        #sayHello {
+            position: absolute;
+            top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <canvas id="canvasEl"> </canvas>
+        <p id="sayHello">colorful world</p>
+    </div>
+
+    <script src="./js/anime.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/utils.js"></script>
+    <!-- <script src="./js/fireworks.js"></script> -->
+    <script type="text/javascript">
+        console.log('sayhello')
+        var canvas = document.getElementById("canvasEl"); //获得画布
+        var ctx = canvas.getContext("2d"); //得到canvas的上下文对象（获得画布控制权）
+
+        console.log('fireworks')
+
+        function updateCoords(e) {
+            pointerX = (e.clientX || e.touches[0].clientX) - canvasEl.getBoundingClientRect().left, pointerY = e.clientY || e.touches[0].clientY - canvasEl.getBoundingClientRect().top
+        }
+
+        function setParticuleDirection(e) {
+            var t = anime.random(0, 360) * Math.PI / 180,
+                a = anime.random(50, 180),
+                n = [-1, 1][anime.random(0, 1)] * a;
+            return {
+                x: e.x + n * Math.cos(t),
+                y: e.y + n * Math.sin(t)
+            }
+        }
+
+        function createParticule(e, t) {
+            var a = {};
+            return a.x = e, a.y = t, a.color = colors[anime.random(0, colors.length - 1)], a.radius = anime.random(16, 32), a.endPos = setParticuleDirection(a), a.draw = function() {
+                ctx.beginPath(), ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0), ctx.fillStyle = a.color, ctx.fill()
+            }, a
+        }
+
+        function createCircle(e, t) {
+            var a = {};
+            return a.x = e, a.y = t, a.color = "#F00", a.radius = .1, a.alpha = .5, a.lineWidth = 6, a.draw = function() {
+                ctx.globalAlpha = a.alpha, ctx.beginPath(), ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0), ctx.lineWidth = a.lineWidth, ctx.strokeStyle = a.color, ctx.stroke(), ctx.globalAlpha = 1
+            }, a
+        }
+
+        function renderParticule(e) {
+            for (var t = 0; t < e.animatables.length; t++) e.animatables[t].target.draw()
+        }
+
+        function setColor() {
+            this.arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];
+            this.lanH1 = document.getElementsByClassName('platform')[0];
+            this.title = document.getElementById('title');
+            this.color = '#' +
+                this.arr[parseInt(Math.random() * 16)] +
+                this.arr[parseInt(Math.random() * 16)] +
+                this.arr[parseInt(Math.random() * 16)] +
+                this.arr[parseInt(Math.random() * 16)] +
+                this.arr[parseInt(Math.random() * 16)] +
+                this.arr[parseInt(Math.random() * 16)];
+            return this.color;
+
+        }
+
+        function animateParticules(e, t) {
+            for (var a = createCircle(e, t), n = [], i = 0; i < numberOfParticules; i++) n.push(createParticule(e, t));
+            anime.timeline().add({
+                targets: n,
+                x: function(e) {
+                    return e.endPos.x
+                },
+                y: function(e) {
+                    return e.endPos.y
+                },
+                radius: .1,
+                duration: anime.random(1200, 1800),
+                easing: "easeOutExpo",
+                update: renderParticule
+            }).add({
+                targets: a,
+                radius: anime.random(80, 160),
+                lineWidth: 0,
+                alpha: {
+                    value: 0,
+                    easing: "linear",
+                    duration: anime.random(600, 800)
+                },
+                duration: anime.random(1200, 1800),
+                easing: "easeOutExpo",
+                update: renderParticule,
+                offset: 0
+            })
+        }
+
+        // var ctx = canvasEl.getContext("2d"),
+        var numberOfParticules = 30,
+            pointerX = 0,
+            pointerY = 0,
+            tap = "mousedown",
+            color1 = setColor(),
+            colors = [color1, setColor(), setColor(), setColor()],
+            setCanvasSize = debounce(function() {
+                canvasEl.width = 2 * window.innerWidth, canvasEl.height = 2 * window.innerHeight, canvasEl.style.width = window.innerWidth + "px", canvasEl.style.height = window.innerHeight + "px", canvasEl.getContext("2d").scale(2, 2)
+            }, 500),
+            render = anime({
+                duration: 1 / 0,
+                update: function() {
+                    ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
+                }
+            });
+        document.addEventListener(tap, function(e) {
+            colors = [setColor(), setColor(), setColor(), setColor()];
+            "sidebar" !== e.target.id && "sayHello" !== e.target.id && (render.play(), updateCoords(e), animateParticules(pointerX, pointerY))
+        }, !1), setCanvasSize(), window.addEventListener("resize", setCanvasSize, !1)
+    </script>
+</body>
+
+</html>

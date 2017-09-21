@@ -66,7 +66,7 @@ function animateParticules(e, t) {
 }
 
 // var ctx = canvasEl.getContext("2d"),
-numberOfParticules = 30,
+var numberOfParticules = 30,
     pointerX = 0,
     pointerY = 0,
     tap = "mousedown",
