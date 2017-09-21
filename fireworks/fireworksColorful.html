@@ -5,69 +5,43 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>fireworks click</title>
+    <link rel="stylesheet" href="css/fireworksColorful.css">
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-        
-        .box {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            background: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .container {
-            padding: 20px;
-            position: absolute;
-            top: 10vh;
-        }
-        
-        #canvasEl {
-            z-index: -1;
-        }
-        
-        .contrls {
-            margin-top: 12px;
-        }
-        
-        #qrcode {
-            background: lightcoral;
-            position: absolute;
-            top: 120px;
-        }
-        
-        #qrcode>img {
-            background: lightcoral;
-            position: absolute;
-        }
+
     </style>
 </head>
 
 <body>
     <div class="box">
         <canvas id="canvasEl"> </canvas>
-        <div class="container">
+
+        <div class="qrContainer">
             <div id="qrcode"></div>
-            <!-- <div id="qrcode">
-            </div> -->
-            <div class="contrls">
+
+            <!-- <div class="contrls">
                 <input type="text" id="getValue" placeholder="请输入" /> <button id="send">生成验证码</button>
 
             </div>
             <div class="contrls">
                 <input type="number" id="getWidth" placeholder="大小(默认240)" />
                 <button id="clear">&nbsp;清空&nbsp;</button>
+            </div> -->
+            <div id='container' class="contrls">
+                <div class='row'>
+                    <label>
+                            <input type='text' id="getValue" placeholder="请输入">
+                            <span id="send">生成</span>
+                         </label>
+                    <label>
+                            <input type="number" id="getWidth" placeholder="大小(默认240)">
+                             <span id="clear">清除</span>
+                    </label>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="./js/anime.min.js"></script>
-    <!-- <script src="./js/jquery.min.js"></script> -->
     <script src="./js/utils.js"></script>
     <script src="./js/fireworksColorful.js"></script>
     <script src="../generateQRcode/js/qrCode.js"></script>
