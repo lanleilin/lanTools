@@ -32,7 +32,7 @@
             <input type="text" id="getValue" placeholder="请输入" /> <button id="send">生成验证码</button>
             <div>
                 <input type="number" id="getWidth" placeholder="大小(默认120)" />
-
+                <button id="clear">&nbsp;清空&nbsp;</button>
             </div>
         </div>
     </div>
@@ -61,6 +61,9 @@
                     _this.getWidth = document.getElementById('getWidth').value.slice(0, 3);
                     _this.w = parseInt(_this.getWidth) ? parseInt(_this.getWidth) : 120;
                     new generate(_this.w);
+                })
+                document.getElementById('clear').addEventListener('click', function() {
+                    document.getElementById('getValue').value = '';
                 })
             }
             new foo();
