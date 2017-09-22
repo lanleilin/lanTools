@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>lanll QRCode</title>
+
+</head>
+
+<body>
+    <div class="box">
+        <canvas id="canvasEl"> </canvas>
+
+        <div class="qrContainer">
+            <div id="qrcode"></div>
+            <div id='container' class="contrls">
+                <div class='row'>
+                    <label>
+                            <input type='text' id="getValue" placeholder="请输入">
+                            <span id="send">生成</span>
+                         </label>
+                    <label>
+                            <input type="number" id="getWidth" placeholder="大小(默认240)">
+                             <span id="clear">清除</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/qrCode.min.js"></script>
+    <script src="../js/anime.min.js"></script>
+    <script src="./bundle.min.js"></script>
+
+</body>
+
+</html>
