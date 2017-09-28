@@ -5,33 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>anchorList</title>
+    <style>
+        a {
+            text-decoration: none;
+            padding: 3px 4px;
+            margin: 3px 4px;
+            border: 1px solid lightsalmon;
+            border-radius: 2px;
+        }
+    </style>
+    <script src="js/vue.min.js"></script>
 </head>
 
 <body>
-    <div class="box">
-        <ul>
-            <li>
-                <a href="http://www.iconfont.cn/search/index?searchType=icon&q=dog&page=3">iconfont图标</a>
-            </li>
-            <li>
-                <a href="http://www.iconfont.cn/search/index?searchType=icon&q=dog&page=3">iconfont图标</a>
-            </li>
-            <li>
-                <a href="http://www.iconfont.cn/search/index?searchType=icon&q=dog&page=3">iconfont图标</a>
-            </li>
-            <li>
-                <a href="http://www.iconfont.cn/search/index?searchType=icon&q=dog&page=3">iconfont图标</a>
-            </li>
-            <li>
-                <a href="http://www.iconfont.cn/search/index?searchType=icon&q=dog&page=3">iconfont图标</a>
-            </li>
-            <li>
-                <a href="http://www.iconfont.cn/search/index?searchType=icon&q=dog&page=3">iconfont图标</a>
-            </li>
-        </ul>
-    </div>
+    <div id="app">
+        <a href="">98080</a>
+        <a v-for='(item,index) in anchorList' :key="index" :href="item.url" target="blank"> {{ item.name }} </a>
 
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                anchorList: [{
+                    name: 'vue2中文文档',
+                    url: 'https://vuefe.cn/v2/guide/'
+                }, {
+                    name: 'baidu',
+                    url: 'https://www.baidu.com'
+                }]
+            }
+        })
+    </script>
 </body>
 
 </html>
