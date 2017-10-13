@@ -1,0 +1,61 @@
+var anchorList = [{
+    name: 'vue2中文文档',
+    url: 'https://vuefe.cn/v2/guide/'
+}, {
+    name: '从零开始部署一个网站视频',
+    url: 'https://www.codecasts.com/series/deploy-a-website-from-scratch'
+}, {
+    name: '阿里云',
+    url: 'https://www.aliyun.com/'
+}, {
+    tag: 'doc',
+    name: '网站部署blog',
+    url: 'http://www.cnblogs.com/dunitian/p/4958462.html'
+}, {
+    tag: 'doc',
+    name: 'PHP&vue',
+    url: 'https://www.codecasts.com/'
+}, {
+    tag: 'doc',
+    name: '配置koa',
+    url: 'http://www.jianshu.com/p/4f9545a19944'
+}, {
+    tag: 'tool',
+    name: '网页版wps',
+    url: 'https://drive.wps.cn/'
+}, {
+    tag: 'tutorial',
+    name: 'nodejs部署',
+    url: 'https://segmentfault.com/a/1190000010213828'
+}, {
+    tag: 'joy',
+    name: 'canvas piceces',
+    url: 'http://species-in-pieces.com/#'
+}, {
+    tag: 'tutorial',
+    name: 'ES6入门',
+    url: 'http://es6.ruanyifeng.com/#docs/intro'
+}, {
+    tag: 'doc',
+    name: 'JQ API',
+    url: 'http://jquery.cuishifeng.cn/'
+}, {
+    name: '部署node',
+    url: 'https://segmentfault.com/a/1190000010213828'
+}, {
+    name: '网站部署langallery',
+    url: 'http://langallery.applinzi.com/'
+}, {
+    name: 'xshell解决',
+    url: 'http://blog.csdn.net/u011596455/article/details/60322568'
+}, {
+    name: 'js测试',
+    url: 'https://jsfiddle.net/'
+}, {
+    name: 'js单线程',
+    url: 'http://javascript.ruanyifeng.com/advanced/single-thread.html'
+}, {
+    tag: 'demo',
+    name: '简单webrtcdemo',
+    url: 'http://webrtc.org.cn/tutorial-simple-video-chat/'
+}]
