@@ -55,6 +55,12 @@ var anchorList = [{
     name: 'js单线程',
     url: 'http://javascript.ruanyifeng.com/advanced/single-thread.html'
 }, {
+    name: '图片转base64',
+    url: 'http://imgbase64.duoshitong.com/'
+}, {
+    name: 'electron教程',
+    url: 'http://blog.csdn.net/arvin0/article/details/52576427'
+}, {
     tag: 'demo',
     name: '简单webrtcdemo',
     url: 'http://webrtc.org.cn/tutorial-simple-video-chat/'
